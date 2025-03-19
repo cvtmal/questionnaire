@@ -21,5 +21,10 @@ final class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Run test questionnaire seeder to create dummy data for pagination testing
+        $this->call([
+            TestQuestionnaireSeeder::class,
+        ]);
     }
 }
