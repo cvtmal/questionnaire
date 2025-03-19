@@ -1,11 +1,10 @@
+import { QuestionnairesTable, type Questionnaire } from '@/components/questionnaires/questionnaires-table';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import { QuestionnairesTable, type Questionnaire } from '@/components/questionnaires/questionnaires-table';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { format } from 'date-fns';
-import { CalendarIcon, UsersIcon, BarChart3Icon } from 'lucide-react';
-import React from "react";
+import { BarChart3Icon, CalendarIcon, UsersIcon } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -63,57 +62,44 @@ export default function Dashboard() {
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
-                                Total Questionnaires
-                            </CardTitle>
-                            <UsersIcon className="h-4 w-4 text-muted-foreground" />
+                            <CardTitle className="text-sm font-medium">Total Questionnaires</CardTitle>
+                            <UsersIcon className="text-muted-foreground h-4 w-4" />
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold">{stats.totalQuestionnaires}</div>
-                            <p className="text-xs text-muted-foreground mt-1">All submissions in the system</p>
+                            <p className="text-muted-foreground mt-1 text-xs">All submissions in the system</p>
                         </CardContent>
                     </Card>
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
-                                Submissions This Month
-                            </CardTitle>
-                            <BarChart3Icon className="h-4 w-4 text-muted-foreground" />
+                            <CardTitle className="text-sm font-medium">Submissions This Month</CardTitle>
+                            <BarChart3Icon className="text-muted-foreground h-4 w-4" />
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold">{stats.submissionsThisMonth}</div>
-                            <p className="text-xs text-muted-foreground mt-1">Total submissions this month</p>
+                            <p className="text-muted-foreground mt-1 text-xs">Total submissions this month</p>
                         </CardContent>
                     </Card>
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium">
-                                Last Updated
-                            </CardTitle>
-                            <CalendarIcon className="h-4 w-4 text-muted-foreground" />
+                            <CardTitle className="text-sm font-medium">Last Updated</CardTitle>
+                            <CalendarIcon className="text-muted-foreground h-4 w-4" />
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold">
-                                {stats.lastUpdatedDate 
-                                    ? format(new Date(stats.lastUpdatedDate), 'PP') 
-                                    : 'Never'}
+                                {stats.lastUpdatedDate ? format(new Date(stats.lastUpdatedDate), 'PP') : 'Never'}
                             </div>
-                            <p className="text-xs text-muted-foreground mt-1">Most recently updated questionnaire</p>
+                            <p className="text-muted-foreground mt-1 text-xs">Most recently updated questionnaire</p>
                         </CardContent>
                     </Card>
                 </div>
                 <Card className="overflow-hidden">
                     <CardHeader>
                         <CardTitle>Questionnaire Submissions</CardTitle>
-                        <CardDescription>
-                            A list of all questionnaire submissions from applicants
-                        </CardDescription>
+                        <CardDescription>A list of all questionnaire submissions from applicants</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <QuestionnairesTable 
-                            questionnaires={questionnaires} 
-                            filters={filters}
-                        />
+                        <QuestionnairesTable questionnaires={questionnaires} filters={filters} />
                     </CardContent>
                 </Card>
             </div>
