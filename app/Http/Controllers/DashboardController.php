@@ -16,16 +16,8 @@ final class DashboardController
      */
     public function index(Request $request, GetDashboardDataAction $action): Response
     {
-        $filters = [
-            'page' => $request->input('page', 1),
-            'per_page' => $request->input('per_page', 10),
-            'sort_field' => $request->input('sort_field', 'created_at'),
-            'sort_direction' => $request->input('sort_direction', 'desc'),
-            'search' => $request->input('search', ''),
-        ];
-
-        $dashboardData = $action->execute($filters);
-
+        $dashboardData = $action->execute();
+        
         return Inertia::render('dashboard', $dashboardData);
     }
 }

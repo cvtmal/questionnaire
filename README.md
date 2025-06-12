@@ -4,7 +4,7 @@ A modern web application for managing and viewing questionnaire submissions. Bui
 
 ## Features
 
-- **Dashboard Overview**: View key statistics including total questionnaires and submissions this month
+- **Questionnaire Overview**: View key statistics including total questionnaires and submissions this month
 - **Advanced Data Table**: Sort, filter, and paginate questionnaire submissions
 - **Search Functionality**: Search by ID or applicant name
 - **Detailed Views**: Click on job titles to see comprehensive submission details
@@ -93,12 +93,12 @@ npm run dev
 
 - **Backend**
   - `app/Models/Questionnaire.php`: Data model for questionnaire entries
-  - `app/Http/Controllers/DashboardController.php`: Handles dashboard data display and filtering
+  - `app/Http/Controllers/QuestionnaireController.php`: Handles questionnaire data display and filtering
 
 - **Frontend**
   - `resources/js/components/questionnaires/questionnaires-table.tsx`: Main table component with sorting, filtering and pagination
   - `resources/js/components/questionnaires/questionnaire-detail-view.tsx`: Detailed view for questionnaire entries
-  - `resources/js/pages/dashboard.tsx`: Main dashboard page
+  - `resources/js/pages/questionnaire.tsx`: Main questionnaire page
 
 ### Database Schema
 
