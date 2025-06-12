@@ -11,6 +11,8 @@ final class Questionnaire extends Model
 {
     use HasFactory;
 
+    protected $connection = 'myitjobc_test';
+
     /**
      * The attributes that should be cast.
      */
