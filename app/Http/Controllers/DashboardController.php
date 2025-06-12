@@ -17,7 +17,7 @@ final class DashboardController
     public function index(Request $request, GetDashboardDataAction $action): Response
     {
         $dashboardData = $action->execute();
-        
+
         return Inertia::render('dashboard', $dashboardData);
     }
 }

@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<Applicant>
  */
-
-class ApplicantFactory extends Factory
+final class ApplicantFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -19,7 +18,7 @@ class ApplicantFactory extends Factory
      * @var string
      */
     protected $model = Applicant::class;
-    
+
     /**
      * Configure the model factory.
      *

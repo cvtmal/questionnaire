@@ -24,6 +24,6 @@ final class Questionnaire extends Model
 
     public function applicant(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\Applicant::class);
+        return $this->belongsTo(Applicant::class);
     }
 }

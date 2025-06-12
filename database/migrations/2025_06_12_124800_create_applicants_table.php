@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +20,7 @@ return new class extends Migration
             $table->string('status_id', 2)->default('1');
             $table->boolean('public_profile')->default(false);
             $table->timestamps();
-            
+
             // Add index for improved query performance
             $table->index('status_id');
         });

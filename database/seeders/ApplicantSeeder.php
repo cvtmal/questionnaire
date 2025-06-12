@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use App\Models\Applicant;
 use Illuminate\Database\Seeder;
 
-class ApplicantSeeder extends Seeder
+final class ApplicantSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,7 @@ class ApplicantSeeder extends Seeder
     {
         // Create 50 random applicants
         Applicant::factory()->count(50)->create();
-        
+
         // Create some specific applicants with known IDs for testing
         Applicant::factory()->createMany([
             [

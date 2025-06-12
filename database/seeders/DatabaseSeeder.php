@@ -27,16 +27,16 @@ final class DatabaseSeeder extends Seeder
         $this->call([
             TestQuestionnaireSeeder::class,
         ]);
-        
+
         // For local development testing, we seed the applicants and questionnaires
         // Disable foreign key checks to ensure we can import properly
         Schema::disableForeignKeyConstraints();
-        
+
         $this->call([
             ApplicantSeeder::class,
             QuestionnaireSeeder::class,
         ]);
-        
+
         Schema::enableForeignKeyConstraints();
     }
 }

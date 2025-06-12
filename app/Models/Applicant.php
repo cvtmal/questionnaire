@@ -10,23 +10,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Applicant extends Model
+final class Applicant extends Model
 {
     use HasFactory;
+
     protected $connection = 'myitjobc_test';
+
     /**
      * append full name to user obj
      *
      * @var array
      */
     protected $appends = ['full_name'];
-
-    protected function casts(): array
-    {
-        return [
-            'public_profile' => 'boolean',
-        ];
-    }
 
     /**
      * getting full username
@@ -38,7 +33,14 @@ class Applicant extends Model
 
     public function questionnaire(): HasOne
     {
-        return $this->hasOne(\App\Models\Questionnaire::class);
+        return $this->hasOne(Questionnaire::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'public_profile' => 'boolean',
+        ];
     }
 
     /**

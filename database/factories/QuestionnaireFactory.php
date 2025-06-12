@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<Questionnaire>
  */
-class QuestionnaireFactory extends Factory
+final class QuestionnaireFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -19,7 +19,7 @@ class QuestionnaireFactory extends Factory
      * @var string
      */
     protected $model = Questionnaire::class;
-    
+
     /**
      * Configure the model factory.
      *
@@ -29,6 +29,7 @@ class QuestionnaireFactory extends Factory
     {
         return $this->connection('myitjobc_test');
     }
+
     /**
      * Define the model's default state.
      *
@@ -49,11 +50,11 @@ class QuestionnaireFactory extends Factory
             'Project Manager',
             null,
         ];
-        
+
         $workloads = ['100%', '80%', '60%', '50%', '40%', null];
-        
+
         $regions = ['Remote', 'Europe', 'Americas', 'Asia', 'Africa', 'Australia', null];
-        
+
         $terminationReasons = [
             'Better opportunity',
             'Relocation',
@@ -62,7 +63,7 @@ class QuestionnaireFactory extends Factory
             'Personal reasons',
             null,
         ];
-        
+
         return [
             'applicant_id' => Applicant::factory(),
             'job_title' => $this->faker->randomElement($jobTitles),

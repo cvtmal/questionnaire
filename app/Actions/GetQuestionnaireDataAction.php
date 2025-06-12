@@ -73,11 +73,11 @@ final readonly class GetQuestionnaireDataAction
 
                 // Search by applicant ID
                 $q->orWhere('applicant_id', 'like', "%{$search}%");
-                
+
                 // Search by applicant name
                 $q->orWhereHas('applicant', function ($subQuery) use ($search): void {
                     $subQuery->where('first_name', 'like', "%{$search}%")
-                             ->orWhere('last_name', 'like', "%{$search}%");
+                        ->orWhere('last_name', 'like', "%{$search}%");
                 });
             });
         }

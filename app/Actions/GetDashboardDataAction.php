@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Models\Applicant;
-use Illuminate\Support\Facades\DB;
+use App\Models\Job;
+use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 final readonly class GetDashboardDataAction
 {
@@ -14,15 +16,17 @@ final readonly class GetDashboardDataAction
     {
         $activeApplicants = Applicant::query()->active()->count();
         $interviews = $this->countInterviews();
-        
+        $activeJobs = $this->countActiveJobs();
+
         return [
             'stats' => [
                 'activeApplicants' => $activeApplicants,
                 'interviews' => $interviews,
+                'activeJobs' => $activeJobs,
             ],
         ];
     }
-    
+
     private function countInterviews(): ?int
     {
         try {
@@ -36,6 +40,15 @@ final readonly class GetDashboardDataAction
                 ->where('presentation_status_id', '!=', '4') // 4 = declined by company
                 ->count();
         } catch (QueryException $e) {
+            return null;
+        }
+    }
+
+    private function countActiveJobs(): ?int
+    {
+        try {
+            return Job::activeJobs()->count();
+        } catch (Exception $e) {
             return null;
         }
     }
