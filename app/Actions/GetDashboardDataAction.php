@@ -20,6 +20,7 @@ final readonly class GetDashboardDataAction
         $activeJobs = $this->countActiveJobs();
         $newApplicantsToday = $this->newApplicantsToday();
         $todayCreatedJobs = $this->todayCreatedJobs();
+        $applicationsToday = $this->applicationsToday();
 
         return [
             'stats' => [
@@ -28,6 +29,7 @@ final readonly class GetDashboardDataAction
                 'activeJobs' => $activeJobs,
                 'newApplicantsToday' => $newApplicantsToday,
                 'todayCreatedJobs' => $todayCreatedJobs,
+                'applicationsToday' => $applicationsToday,
             ],
         ];
     }
@@ -74,6 +76,20 @@ final readonly class GetDashboardDataAction
         try {
             return Job::query()
                 ->whereDate('created_at', Carbon::today())
+                ->count();
+        } catch (QueryException $e) {
+            return null;
+        }
+    }
+
+    private function applicationsToday(): ?int
+    {
+        try {
+            return DB::connection('myitjobc_test')
+                ->table('applicant_job')
+                ->join('applicants', 'applicant_job.applicant_id', 'applicants.id')
+                ->whereNot('status_id', '2') // approved applicants
+                ->where('applicant_interested', '1') // applicant interested = internet request
                 ->count();
         } catch (QueryException $e) {
             return null;
