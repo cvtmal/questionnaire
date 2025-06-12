@@ -18,6 +18,7 @@ final readonly class GetDashboardDataAction
         $activeApplicants = Applicant::query()->active()->count();
         $interviews = $this->countInterviews();
         $activeJobs = $this->countActiveJobs();
+        $newApplicantsToday = $this->newApplicantsToday();
         $todayCreatedJobs = $this->todayCreatedJobs();
 
         return [
@@ -25,6 +26,7 @@ final readonly class GetDashboardDataAction
                 'activeApplicants' => $activeApplicants,
                 'interviews' => $interviews,
                 'activeJobs' => $activeJobs,
+                'newApplicantsToday' => $newApplicantsToday,
                 'todayCreatedJobs' => $todayCreatedJobs,
             ],
         ];
@@ -52,6 +54,17 @@ final readonly class GetDashboardDataAction
         try {
             return Job::activeJobs()->count();
         } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    private function newApplicantsToday(): ?int
+    {
+        try {
+            return Applicant::query()
+                ->whereDate('created_at', Carbon::today())
+                ->count();
+        } catch (QueryException $e) {
             return null;
         }
     }
