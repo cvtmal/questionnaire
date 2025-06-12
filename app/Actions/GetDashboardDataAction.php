@@ -154,9 +154,6 @@ final class GetDashboardDataAction
      * Paginate questionnaires based on request parameters.
      *
      * @param  Builder<Questionnaire>  $query
-     * @param  int|string  $perPage
-     * @param  int  $page
-     * @param  int  $total
      * @return LengthAwarePaginator<Questionnaire>
      */
     private function paginateQuestionnaires(Builder $query, int|string $perPage, int $page, int $total): LengthAwarePaginator
