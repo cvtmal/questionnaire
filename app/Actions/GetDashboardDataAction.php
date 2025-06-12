@@ -88,8 +88,11 @@ final readonly class GetDashboardDataAction
             return DB::connection('myitjobc_test')
                 ->table('applicant_job')
                 ->join('applicants', 'applicant_job.applicant_id', 'applicants.id')
-                ->whereNot('status_id', '2') // approved applicants
-                ->where('applicant_interested', '1') // applicant interested = internet request
+                ->where(function($query) {
+                    $query->whereNot('status_id', '2')
+                        ->orWhereNull('status_id');
+                })
+                ->where('applicant_interested', '1')
                 ->whereDate('applicant_job.created_at', Carbon::today())
                 ->count();
         } catch (QueryException $e) {
