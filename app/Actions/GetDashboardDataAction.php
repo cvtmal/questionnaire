@@ -26,7 +26,8 @@ final readonly class GetDashboardDataAction
     private function countInterviews(): ?int
     {
         try {
-            return DB::table('applicant_job')
+            return DB::connection('myitjobc_test')
+                ->table('applicant_job')
                 ->join('presentations', 'applicant_job.presentation_id', '=', 'presentations.id')
                 ->join('applicants', 'applicant_job.applicant_id', '=', 'applicants.id')
                 ->whereNotNull('interview_datetime_1') // triggered presentation status change from pendent to interview
