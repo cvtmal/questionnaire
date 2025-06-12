@@ -61,7 +61,7 @@ export function QuestionnaireDetailView({ questionnaire }: { questionnaire: Ques
                         <h3 className="text-sm font-semibold">Additional Info</h3>
                         <div className="space-y-2">
                             <DetailItem label="Termination Reason" value={questionnaire.termination_reason} />
-                            <DetailItem label="Availability" value={formatDate(questionnaire.availability)} />
+                            <DetailItem label="Availability" value={questionnaire.availability} />
                             <div className="mt-1 grid grid-cols-2 gap-2">
                                 <DetailItem label="Created" value={formatDate(questionnaire.created_at)} />
                                 <DetailItem label="Updated" value={formatDate(questionnaire.updated_at)} />
