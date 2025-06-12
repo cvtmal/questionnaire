@@ -40,7 +40,8 @@ export function QuestionnaireDetailView({ questionnaire }: { questionnaire: Ques
                         <h3 className="text-sm font-semibold">Basic Info</h3>
                         <div className="space-y-2">
                             <DetailItem label="ID" value={questionnaire.id} />
-                            <DetailItem label="Applicant ID" value={questionnaire.applicant_id} />
+                            <DetailItem label="Applicant" value={questionnaire.applicant ? questionnaire.applicant.full_name : '-'} />
+                            <DetailItem label="Applicant ID" value={questionnaire.applicant_id} className="mt-1 text-xs text-muted-foreground" />
                             <DetailItem label="Job Title" value={questionnaire.job_title} />
                             <DetailItem label="Region" value={questionnaire.region} />
                         </div>

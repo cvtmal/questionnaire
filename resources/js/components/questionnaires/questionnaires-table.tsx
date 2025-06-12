@@ -20,9 +20,17 @@ import React from 'react';
 import { FiChevronDown, FiChevronUp, FiEye, FiInfo } from 'react-icons/fi';
 import { QuestionnaireDetailView } from './questionnaire-detail-view';
 
+export interface Applicant {
+    id: number;
+    first_name: string;
+    last_name: string;
+    full_name: string;
+}
+
 export interface Questionnaire {
     id: number;
     applicant_id: number;
+    applicant: Applicant;
     job_title: string | null;
     workload: string | null;
     region: string | null;
@@ -279,7 +287,7 @@ export function QuestionnairesTable({ questionnaires, filters }: QuestionnairesT
                             <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
                             <Input
                                 type="search"
-                                placeholder="Search by ID or Applicant..."
+                                placeholder="Search by ID or Applicant name..."
                                 value={searchTerm}
                                 onChange={handleSearchInputChange}
                                 onKeyDown={handleKeyDown}
@@ -362,7 +370,7 @@ export function QuestionnairesTable({ questionnaires, filters }: QuestionnairesT
                             questionnaires.data.map((questionnaire) => (
                                 <TableRow key={questionnaire.id}>
                                     <TableCell className="font-medium">{questionnaire.id}</TableCell>
-                                    <TableCell>{questionnaire.applicant_id}</TableCell>
+                                    <TableCell>{questionnaire.applicant ? questionnaire.applicant.full_name : '-'}</TableCell>
                                     <TableCell>
                                         <TextWithTooltip
                                             text={questionnaire.job_title}

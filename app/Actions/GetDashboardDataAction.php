@@ -61,7 +61,7 @@ final class GetDashboardDataAction
         $stats = $this->calculateStats($allQuestionnaires);
 
         // Build the query with search and sorting
-        $query = Questionnaire::query();
+        $query = Questionnaire::query()->with('applicant');
 
         // Apply search if provided
         if (! empty($search)) {
@@ -71,8 +71,14 @@ final class GetDashboardDataAction
                     $q->where('id', 'like', "%{$search}%");
                 }
 
-                // Search by applicant name
+                // Search by applicant ID
                 $q->orWhere('applicant_id', 'like', "%{$search}%");
+                
+                // Search by applicant name
+                $q->orWhereHas('applicant', function ($subQuery) use ($search): void {
+                    $subQuery->where('first_name', 'like', "%{$search}%")
+                             ->orWhere('last_name', 'like', "%{$search}%");
+                });
             });
         }
 

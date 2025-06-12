@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 final class DatabaseSeeder extends Seeder
 {
@@ -26,5 +27,16 @@ final class DatabaseSeeder extends Seeder
         $this->call([
             TestQuestionnaireSeeder::class,
         ]);
+        
+        // For local development testing, we seed the applicants and questionnaires
+        // Disable foreign key checks to ensure we can import properly
+        Schema::disableForeignKeyConstraints();
+        
+        $this->call([
+            ApplicantSeeder::class,
+            QuestionnaireSeeder::class,
+        ]);
+        
+        Schema::enableForeignKeyConstraints();
     }
 }
