@@ -8,6 +8,7 @@ use App\Models\Applicant;
 use App\Models\Job;
 use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 final readonly class GetDashboardDataAction
@@ -17,12 +18,14 @@ final readonly class GetDashboardDataAction
         $activeApplicants = Applicant::query()->active()->count();
         $interviews = $this->countInterviews();
         $activeJobs = $this->countActiveJobs();
+        $todayCreatedJobs = $this->todayCreatedJobs();
 
         return [
             'stats' => [
                 'activeApplicants' => $activeApplicants,
                 'interviews' => $interviews,
                 'activeJobs' => $activeJobs,
+                'todayCreatedJobs' => $todayCreatedJobs,
             ],
         ];
     }
@@ -49,6 +52,17 @@ final readonly class GetDashboardDataAction
         try {
             return Job::activeJobs()->count();
         } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    private function todayCreatedJobs(): ?int
+    {
+        try {
+            return Job::query()
+                ->whereDate('created_at', Carbon::today())
+                ->count();
+        } catch (QueryException $e) {
             return null;
         }
     }

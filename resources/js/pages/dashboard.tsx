@@ -16,6 +16,7 @@ interface PageProps {
         activeApplicants: number;
         interviews: number | null;
         activeJobs: number | null;
+        todayCreatedJobs: number | null;
     };
 }
 
@@ -55,6 +56,16 @@ export default function Dashboard() {
                         <CardContent>
                             <div className="text-2xl font-bold">{stats.activeJobs !== null ? stats.activeJobs : 'N/A'}</div>
                             <p className="text-muted-foreground mt-1 text-xs">Currently active job postings</p>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium">Jobs Today</CardTitle>
+                            <CalendarIcon className="text-muted-foreground h-4 w-4" />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">{stats.todayCreatedJobs !== null ? stats.todayCreatedJobs : 'N/A'}</div>
+                            <p className="text-muted-foreground mt-1 text-xs">New jobs created today</p>
                         </CardContent>
                     </Card>
                 </div>
